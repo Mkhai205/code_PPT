@@ -6,10 +6,11 @@ double Bo = 0, eps;
 double Ax[101], Bx[100][100], g[100], x[100], x_temp[100];
 
 void input(){
-    printf("Nhap so phuong trinh: ");
+    printf("Enter the number of equations: ");
     scanf("%d", &n);
-    printf("Nhap he so:\n");
+    printf("Enter the coefficients of the equation:\n");
     for (int i=0; i<n; i++){
+        printf("The coefficients of equation %d: ", i+1);
         for(int j=0; j<=n; j++){
             scanf("%lf", &Ax[j]);
         }
@@ -19,20 +20,20 @@ void input(){
         }
         g[i] = Ax[n]/Ax[i];
     }
-    printf("\nNhap so lan lap: ");
+    printf("\nEnter the number of iterations: ");
     scanf("%d", &sll);
 }
 
 void output(){
     printf("\n####################################\n");
-    printf("Sai so: %.10lf\n", eps);
-    printf("\nNghiem cua he phuong trinh la:\n");
+    printf("Error: %.10lf\n", eps);
+    printf("\nThe solution of the system of equations is:\n");
     for(int i=0; i<n; i++){
         printf("x[%d] = %.10lf +- %.10lf\n", i+1, x[i], eps);
     }
 }
 
-void chuan0(){
+void convergence_conditions(){
     for(int i=0; i<n; i++){
         double max_temp = 0;
         for(int j=0; j<n; j++){
@@ -43,7 +44,7 @@ void chuan0(){
 }
 
 
-void sai_so(){
+void error_assessment(){
     double max = 0, temp;
     for(int i=0; i<n; i++){
         temp = fabs(x[i] - x_temp[i]);
@@ -58,9 +59,9 @@ void swap(double *a, double *b){
     *b = temp;
 }
 
-void lap1(int sll){
+void repeat(int sll){
     if(sll == 0){
-        sai_so();
+        error_assessment();
         return;
     }
     for(int i=0; i<n; i++){
@@ -73,17 +74,17 @@ void lap1(int sll){
     for(int i=0; i<n; i++){
         swap(&x[i], &x_temp[i]);
     }
-    lap1(sll-1);
+    repeat(sll-1);
 }
 
 void single_iteration_method(){
     input();
-    chuan0();
+    convergence_conditions();
     if(Bo >= 1){
-        printf("He phuong trinh khong hoi tu\n");
+        printf("The system of equations does not converge\n");
         return;
     }
-    lap1(sll);
+    repeat(sll);
     output();
 }
 

@@ -54,8 +54,11 @@ int main(){
     
 
     // Solve the system of equations in gaussian terms
-    n = n+1; //n is made n+1 because the Gaussian Elimination part below was for n equations, 
-            //but here n is the degree of polynomial and for n degree we get n+1 equations
+    /* 
+        n is made n+1 because the Gaussian Elimination part below was for n equations, 
+        but here n is the degree of polynomial and for n degree we get n+1 equations
+    */
+    n = n+1; 
     printf("\nThe Normal(Augmented Matrix) is as follows:\n");
     for(i=0; i<n; i++){
         for(j=0; j<n; j++){
