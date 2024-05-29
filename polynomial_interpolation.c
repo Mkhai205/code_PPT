@@ -8,7 +8,7 @@ double x[100], y[100];
 double X[11], Y[11];
 double polynomialCoefficientsMatrix[11][12], interpolationCoefficients[11];
 
-void input_data(){
+void enter_data(){
     printf("\nEnter the number of data pairs: ");
     scanf("%d", &numberOfPoints);
     
@@ -32,7 +32,7 @@ void input_data(){
 
 int file_data(){
     FILE *fp;
-    char filename[] = "input.txt";
+    char filename[] = "input_PI.txt";
     fp = fopen(filename, "r");
     if (fp == NULL) {
         perror("Error opening file");
@@ -50,6 +50,24 @@ int file_data(){
     fclose(fp);
     printf("Read file successfully\n");
     return 1;
+}
+
+int input(){
+    char choice, temp;
+    while(1){
+        
+        printf("Do you want to enter data from the keyboard or from the file? (k/f): ");
+        scanf("%c", &choice);
+        scanf("%c", &temp);
+        if(choice == 'k'){
+            enter_data();
+            return 1;
+        } else if(choice == 'f'){
+            return file_data();
+        } else {
+            printf("Invalid choice\n");
+        }
+    }
 }
 
 void data_preprocessing(){
@@ -126,14 +144,14 @@ void output(){
 
 void file_output(){
     FILE *fp;
-    char filename[] = "output.txt";
+    char filename[] = "output_PI.txt";
     fp = fopen(filename, "w");
     if (fp == NULL) {
         perror("Error opening file");
         return;
     }
     for(int i=0; i<numberOfCoefficients; i++){
-        fprintf(fp, "%lf\n", interpolationCoefficients[i]);
+        fprintf(fp, "%.16lf\n", interpolationCoefficients[i]);
     }
     for(int i=0; i<numberOfPoints; i++){
         fprintf(fp, "%lf ", x[i]);
@@ -146,15 +164,16 @@ void file_output(){
     printf("Write file successfully\n");
 }
 
-int main(){
-    if(file_data()){
+void polynomial_interpolation(){
+    if(input()){
         data_preprocessing();
         solve_by_gaussian();
         output();
         file_output();
     }
-    else{
-        printf("Cannot read file");
-    }
+}
+
+int main(){
+    polynomial_interpolation();
     return 0;
 }
