@@ -2,7 +2,7 @@
 #include "math.h"
 
 int degreeOfPolynomial, numberOfPoints, numberOfCoefficients;
-double x[100], y[100];
+double x[100005], y[100005];
 // Array X to store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
 // Array Y to store the values of sigma(yi),sigma(xi*yi),sigma(xi^2*yi)...sigma(xi^n*yi)
 double X[11], Y[11];
