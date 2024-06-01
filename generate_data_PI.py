@@ -28,12 +28,13 @@ def generate_polynomial_data(num_points, coefficients, x_range=(-10, 10), noise_
 
         f.write(f"{len(coefficients) - 1}\n")  # Ghi bậc của đa thức
     f.close()
+    print(f"Data generated successfully and saved as file: {filename}!")
     
-# Ví dụ sử dụng:
-num_points = 100
-coefficients = [1, 2, 1]  # Đa thức
-noise_std_dev = 50  # Thêm nhiễu với độ lệch chuẩn
-filename = "input_PI.txt"
 
-generate_polynomial_data(num_points, coefficients, (-20, 20),noise_std_dev=noise_std_dev, filename=filename)
-print(f"Đã tạo bộ dữ liệu kiểm tra và lưu vào file: {filename}")
+
+if __name__ == "__main__":
+    num_points = 100
+    coefficients = [1, 2, 1]  # Hệ số của đa thức
+    noise_std_dev = 50  # Thêm nhiễu với độ lệch chuẩn
+    filename = "input_PI.txt"
+    generate_polynomial_data(num_points, coefficients, noise_std_dev=noise_std_dev, filename=filename)
