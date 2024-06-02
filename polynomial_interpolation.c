@@ -93,7 +93,7 @@ void data_preprocessing(){
     }
     // Build the values of Y as the last column of polynomialCoefficientsMatrix(Normal Matrix but augmented)
     for(int i=0; i<=degreeOfPolynomial; i++){ 
-        polynomialCoefficientsMatrix[i][degreeOfPolynomial+1] = Y[i]; 
+        polynomialCoefficientsMatrix[i][degreeOfPolynomial+1] = Y[i];
     }
     // The number of coefficients in the augmented matrix
     printf("\nThe Augmented Matrix is as follows:\n");
